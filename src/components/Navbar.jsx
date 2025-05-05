@@ -12,14 +12,22 @@ const Navbar = () => {
 
   return (
     <div className="flex justify-between items-center h-20 w-[90%] mx-auto relative">
-      <div>
-        <Link to="/" className="text-2xl font-bold text-blue-500 hover:text-blue-700 mx-4">Home</Link>
-        <Link to="/products" className="text-2xl font-bold text-blue-500 hover:text-blue-700 mx-4">Products</Link>
-        <Link to="/users" className="text-2xl font-bold text-blue-500 hover:text-blue-700 mx-4">User</Link>
+      <div className="flex items-center gap-2">
+        <img src="/logo.png" alt="logo" className="h-10" />
+        <h1 className="text-3xl font-semibold">Mike</h1>
       </div>
 
-      <div className="relative">
-        <button onClick={handleCartClick} className="text-3xl text-blue-500 hover:text-blue-700">
+      <div>
+        <Link to="/" className="text-2xl font-bold text-black-500 hover:text-blue-700 mx-4">Home</Link>
+        <Link to="/products" className="text-2xl font-bold text-black-500 hover:text-blue-700 mx-4">Products</Link>
+        <Link to="/users" className="text-2xl font-bold text-black-500 hover:text-blue-700 mx-4">User</Link>
+      </div>
+
+      <div className="relative flex items-center">
+        <button
+          onClick={handleCartClick}
+          className="text-3xl text-blue-500 hover:text-blue-700 transition-all duration-200"
+        >
           <IoCartOutline />
         </button>
         {cartItems.length > 0 && (

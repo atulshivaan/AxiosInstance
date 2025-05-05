@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { FaCartArrowDown } from "react-icons/fa6";
 import axiosInstance from "../utils/axios";
 import { useCart } from "../utils/CartContext";
+import { toast } from "react-toastify"; // For notifications
+import { Navigate } from "react-router-dom";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -17,6 +19,12 @@ const Products = () => {
     const productInCart = cartItems.find(item => item.id === productId);
     return productInCart ? productInCart.price * productInCart.quantity : 0;
   };
+
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    toast.success(`${product.title} has been added to the cart!`, { autoClose: 2000 }); // Toast notification
+  };
+
 
   return (
     <div className="p-4">
@@ -37,7 +45,7 @@ const Products = () => {
             </p>
 
             <button
-              onClick={() => addToCart(product)}
+              onClick={() => handleAddToCart(product)}
               className="flex items-center gap-2 px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition"
             >
               Add to Cart <FaCartArrowDown />
@@ -45,6 +53,8 @@ const Products = () => {
           </div>
         ))}
       </div>
+
+     
     </div>
   );
 };
