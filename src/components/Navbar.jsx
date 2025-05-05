@@ -1,18 +1,38 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
+import { IoCartOutline } from "react-icons/io5";
+import { useCart } from "../utils/CartContext";
 
 const Navbar = () => {
+  const { cartItems, getTotalPrice } = useCart();
+  const navigate = useNavigate();
+
+  const handleCartClick = () => {
+    navigate("/cart"); // Navigate to the CartPage
+  };
+
   return (
-    <div className="flex justify-center align-center h-20 w-[90%] mx-30">
+    <div className="flex justify-between items-center h-20 w-[90%] mx-auto relative">
+      <div>
+        <Link to="/" className="text-2xl font-bold text-blue-500 hover:text-blue-700 mx-4">Home</Link>
+        <Link to="/products" className="text-2xl font-bold text-blue-500 hover:text-blue-700 mx-4">Products</Link>
+        <Link to="/users" className="text-2xl font-bold text-blue-500 hover:text-blue-700 mx-4">User</Link>
+      </div>
 
-     <Link to="/" className="text-3xl font-bold text-blue-500 hover:text-blue-700 mx-4">Home</Link>
-        <Link to="/products" className="text-3xl font-bold text-blue-500 hover:text-blue-700 mx-4">Products</Link>
-       
-        <Link to="/users" className="text-3xl font-bold text-blue-500 hover:text-blue-700 mx-4">User</Link>
-     
-
-      
+      <div className="relative">
+        <button onClick={handleCartClick} className="text-3xl text-blue-500 hover:text-blue-700">
+          <IoCartOutline />
+        </button>
+        {cartItems.length > 0 && (
+          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+            {cartItems.length}
+          </span>
+        )}
+        <p className="ml-4 text-lg font-semibold">
+          Total: ${getTotalPrice().toFixed(2)}
+        </p>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

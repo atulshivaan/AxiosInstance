@@ -22,7 +22,7 @@ const User = () => {
         {users.map((user) => (
           <div key={user.id} className="border p-4 rounded shadow">
             <img
-              src={`https://i.pravatar.cc/150?img=${user.id}`} // Placeholder image
+              src={`https://i.pravatar.cc/150?img=${user.id}`} 
               alt={`${user.name.firstname} ${user.name.lastname}`}
               className="h-40 w-40 object-cover rounded-full mx-auto"
             />
